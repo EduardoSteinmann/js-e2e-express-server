@@ -6,63 +6,43 @@
 trigger:
 - main
 
+variables:
+  message: "Hello World!"
+
 stages:
-
-  variables:
-    message: "Hello World!"
-
-  -stage:
-  pool:
-    vmImage: ubuntu-latest
+- stage: Install Node and React
   jobs:
-    -job:
+  - job: InstallNode
     steps:
-    - task: NodeTool@0
-      inputs:
-        versionSpec: '10.x'
-      displayName: 'Install Node.js'
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '10.x'
+        displayName: 'Install Node.js'
+      - script: |
+          echo message
+          npm install
+          npm run build
+        displayName: 'npm install and build'
 
+  - job: InstallReact
+    steps:
+        - script: |
+            echo message
+            npm install react
+          displayName: 'npm install react'
+
+- stage: Install ngrok and restify (for Bot Framework)
+  jobs:
+  - job: Install-ngrok
+    steps:
     - script: |
         echo message
         npm install
         npm run build
       displayName: 'npm install and build'
-
-    - job:
-      steps:
-      - task: NodeTool@0
-        inputs:
-          versionSpec: '10.x'
-        displayName: 'Install react'
-
-      - script: |
-          echo message
-          npm install react
-        displayName: 'npm install react'
-    
-  -stage:
-    pool:
-    vmImage: ubuntu-latest
-    -job:
+  - job: InstallRestify
     steps:
-    - task: NodeTool@0
-      inputs:
-        versionSpec: '10.x'
-      displayName: 'Install ngrok'
-
     - script: |
         echo message
-        npm install ngrok
-      displayName: 'npm install ngrok'
-
-    - job:
-      steps:
-      - task: NodeTool@0
-        inputs:
-          versionSpec: '10.x'
-        displayName: 'Install restify'
-
-      - script: |
-          echo message
-          npm install restify
-        displayName: 'npm install restify'
+        npm install restify
+      displayName: 'npm install restify'
