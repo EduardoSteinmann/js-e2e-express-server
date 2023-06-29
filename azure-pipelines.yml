@@ -12,7 +12,6 @@ stages:
     message: "Hello World!"
 
   -stage:
-
   pool:
     vmImage: ubuntu-latest
   jobs:
