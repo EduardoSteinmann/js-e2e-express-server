@@ -6,16 +6,64 @@
 trigger:
 - main
 
-pool:
-  vmImage: ubuntu-latest
+stages:
 
-steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
+  variables:
+    message: "Hello World!"
 
-- script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
+  -stage:
+
+  pool:
+    vmImage: ubuntu-latest
+  jobs:
+    -job:
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '10.x'
+      displayName: 'Install Node.js'
+
+    - script: |
+        echo message
+        npm install
+        npm run build
+      displayName: 'npm install and build'
+
+    - job:
+      steps:
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '10.x'
+        displayName: 'Install react'
+
+      - script: |
+          echo message
+          npm install react
+        displayName: 'npm install react'
+    
+  -stage:
+    pool:
+    vmImage: ubuntu-latest
+    -job:
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '10.x'
+      displayName: 'Install ngrok'
+
+    - script: |
+        echo message
+        npm install ngrok
+      displayName: 'npm install ngrok'
+
+    - job:
+      steps:
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '10.x'
+        displayName: 'Install restify'
+
+      - script: |
+          echo message
+          npm install restify
+        displayName: 'npm install restify'
