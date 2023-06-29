@@ -10,7 +10,7 @@ variables:
   message: "Hello World!"
 
 stages:
-- stage: Install-Node-and-React
+- stage: Install_Node_and_React
   jobs:
   - job: InstallNode
     steps:
@@ -31,9 +31,9 @@ stages:
             npm install react
           displayName: 'npm install react'
 
-- stage: Install-ngrok-and-restify-(for-Bot-Framework)
+- stage: Install_ngrok_and_Restify_BotFramework
   jobs:
-  - job: Install-ngrok
+  - job: Install_ngrok
     steps:
     - script: |
         echo message
